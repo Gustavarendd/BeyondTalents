@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="BeyondTalents.Views.AddCandidateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BeyondTalents.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+       
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10">
+            <!-- First Name -->
+            <TextBox Text="{Binding Candidate.FirstName, Mode=TwoWay}" Margin="5"  />
+            <TextBox Text="{Binding Candidate.LastName, Mode=OneWay}" Margin="5"  />
+
+            <!-- Address -->
+            <TextBox Text="{Binding Candidate.Address}" Margin="5"  />
+
+            <!-- Phone and Email -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5">
+                <TextBox Text="{Binding Candidate.PhoneNumber}" Width="250" Margin="5"  />
+                <TextBox Text="{Binding Candidate.Email}" Width="250" Margin="5" />
+            </StackPanel>
+
+            <!-- City (This can be a ComboBox populated with City data) -->
+            <ComboBox SelectedValue="{Binding Candidate.CityID}" Margin="5">
+                <!-- Example City options -->
+                <ComboBoxItem Content="New York" Tag="1" />
+                <ComboBoxItem Content="Los Angeles" Tag="2" />
+            </ComboBox>
+
+            <!-- Picture (this can be a simple button to upload an image) -->
+            <Button Content="Upload Picture" Command="{Binding UploadPictureCommand}" Margin="5" />
+
+            <!-- CV (Add a field for the CV) -->
+            <TextBox Text="{Binding Candidate.Link}" Margin="5" />
+
+            <!-- Save Button -->
+            <Button Content="Save" Command="{Binding SaveCommand}" HorizontalAlignment="Center" Margin="10" />
+        </StackPanel>
+    </Grid>
+</UserControl>
