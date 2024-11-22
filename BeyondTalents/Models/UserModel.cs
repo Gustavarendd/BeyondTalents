@@ -15,5 +15,8 @@ namespace BeyondTalents.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public string DisplayName { get; set; }
+        public byte[] ProfilePicture { get; set; }
+
     }
 }

@@ -13,18 +13,18 @@ namespace BeyondTalents
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             //Load the login view
-            //var loginView = new LoginView();
-            //loginView.Show();
+            var loginView = new LoginView();
+            loginView.Show();
 
-            //loginView.IsVisibleChanged += (s, ev) =>
-            //{
-            //    if (!loginView.IsVisible && loginView.IsLoaded)
-            //    {
+            loginView.IsVisibleChanged += (s, ev) =>
+            {
+                if (!loginView.IsVisible && loginView.IsLoaded)
+                {
                     var mainView = new MainWindow();
                     mainView.Show();
 
-            //    }
-            //};
+                }
+            };
         }
     }
 

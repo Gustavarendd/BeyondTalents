@@ -7,6 +7,51 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" 
+                   Text="{Binding WelcomeText}" 
+                   FontSize="20" 
+                   Foreground="White"
+                   FontFamily="Montserrat"
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center"
+                   Margin="20,0,0,0"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Saved Searches" 
+                       FontSize="20" 
+                       Foreground="White"
+                       FontFamily="Montserrat"
+                       FontWeight="Bold" 
+                       VerticalAlignment="Center"
+                       Margin="20,0,0,0"/>
+            <!--<ListView ItemsSource="{Binding SavedLists}" 
+                      SelectedItem="{Binding SelectedList}"
+                      Margin="20"
+                      Background="White"
+                      BorderBrush="Black"
+                      BorderThickness="1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FirstName}" Width="auto"/>
+                        <GridViewColumn Header="Number of candidates" DisplayMemberBinding="{Binding LastName}" Width="auto"/>
+                        <GridViewColumn Header="Created" DisplayMemberBinding="{Binding City}" Width="auto"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
+
+        </StackPanel>
     </Grid>
+    
+    
 </UserControl>

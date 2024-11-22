@@ -14,8 +14,9 @@ namespace BeyondTalents.Repositories
         private string _connectionString;
         public RepositoryBase()
         {
-            _connectionString = @"Data Source=GUSTAVS-PC\MSSQL2022DEV;Initial Catalog=BeyondTalentsDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;";
+            _connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
         }
+        
 
         protected SqlConnection GetConnection()
         {

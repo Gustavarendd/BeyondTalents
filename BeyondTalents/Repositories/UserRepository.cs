@@ -32,8 +32,8 @@ namespace BeyondTalents.Repositories
 
                     
 
-                    command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
-                    command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
+                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = credential.UserName;
+                    command.Parameters.Add("@password", SqlDbType.VarChar).Value = credential.Password;
 
                     validUser = command.ExecuteScalar() == null ? false : true;
                 }
@@ -65,7 +65,44 @@ namespace BeyondTalents.Repositories
 
         public UserModel GetUserById(string id)
         {
-            throw new NotImplementedException();
+            UserModel user = null;
+
+            try
+            {
+                using (var connection = GetConnection())
+                using (var command = new SqlCommand("SELECT * FROM [User] WHERE Id = @id", connection))
+                {
+                    connection.Open();
+                    command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            user = new UserModel
+                            {
+                                Id = reader["Id"].ToString(),
+                                Username = reader["Username"].ToString(),
+                                Password = String.Empty,
+                                Email = reader["Email"].ToString(),
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString()
+                            };
+                        }
+                        else
+                        {
+                            user = null;
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log exception (consider a logging framework)
+                Console.WriteLine($"Database error: {ex.Message}");
+                throw; // Optionally rethrow or handle the exception
+            }
+
+            return user;
         }
 
         public UserModel GetUserByUsername(string username)
@@ -79,7 +116,7 @@ namespace BeyondTalents.Repositories
 
                 {
                     connection.Open();
-                    command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
+                    command.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -87,12 +124,13 @@ namespace BeyondTalents.Repositories
                         {
                             user = new UserModel
                             {
-                                Id = reader["Id"].ToString(),
+                                Id = reader["userID"].ToString(),
                                 Username = reader["Username"].ToString(),
                                 Password = String.Empty,
                                 Email = reader["Email"].ToString(),
                                 FirstName = reader["FirstName"].ToString(),
                                 LastName = reader["LastName"].ToString()
+
                             };
                         }
                         else
@@ -119,5 +157,7 @@ namespace BeyondTalents.Repositories
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

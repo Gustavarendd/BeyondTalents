@@ -2,6 +2,7 @@
 using BeyondTalents.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -231,6 +232,29 @@ namespace BeyondTalents.Repositories
 
 
         }
+
+        public async Task<DataSet> GetCandidateDetailsAsync(int candidateId)
+        {
+            
+
+            using (SqlConnection connection = GetConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("GetCandidateDetails", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@CandidateID", candidateId);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataSet dataSet = new DataSet();
+
+                    await connection.OpenAsync();
+                    adapter.Fill(dataSet);
+
+                    return dataSet;
+                }
+            }
+        }
+
     }
-    
+
 }

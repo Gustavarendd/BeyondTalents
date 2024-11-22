@@ -15,7 +15,7 @@ namespace BeyondTalents.ViewModels
     public class MainViewModel : ViewModelBase
     {
         // fields
-        private UserAccountModel _userAccount;
+        private UserModel _userAccount;
         private ViewModelBase _currentChildView;
         private string _caption;
         private IconChar _icon;
@@ -24,7 +24,7 @@ namespace BeyondTalents.ViewModels
 
 
         // properties
-        public UserAccountModel UserAccount
+        public UserModel UserAccount
         {
             get => _userAccount;
             set
@@ -73,7 +73,7 @@ namespace BeyondTalents.ViewModels
         public MainViewModel()
         {
             _userRepository = new UserRepository();
-            UserAccount = new UserAccountModel();
+            UserAccount = new UserModel();
 
             // initialize commands
             ShowDashboardViewCommand = new RelayCommand(ExecuteShowDashboardViewCommand);
@@ -113,12 +113,17 @@ namespace BeyondTalents.ViewModels
             var identity = Thread.CurrentPrincipal?.Identity;
             if (identity != null && identity.IsAuthenticated)
             {
-                var user = _userRepository.GetUserByUsername(identity.Name);
+                UserModel user = _userRepository.GetUserByUsername(identity.Name);
                 if (user != null)
                 {
                     UserAccount.Username = user.Username;
                     UserAccount.DisplayName = $"{user.FirstName} {user.LastName}";
+                    UserAccount.Email = user.Email;
+                    UserAccount.FirstName = user.FirstName;
+                    UserAccount.LastName = user.LastName;
+
                     UserAccount.ProfilePicture = null;
+
                 }
                 else
                 {

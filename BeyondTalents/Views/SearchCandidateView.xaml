@@ -22,16 +22,46 @@
         </Grid.ColumnDefinitions>
         
         <!-- Search Criteria Fields -->
-        <TextBox Text="{Binding FirstName}" Grid.Column="0" />
-        <TextBox Text="{Binding LastName}" Grid.Column="1"/>
-        <TextBox Text="{Binding City}" Grid.Column="2"/>
-        <TextBox Text="{Binding Skill}" Grid.Column="3"/>
-        <TextBox Text="{Binding SchoolName}" Grid.Column="4"/>
-        <TextBox Text="{Binding Degree}" Grid.Column="5"/>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock Text="First Name" Foreground="White"  Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="0"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Last Name" Foreground="White" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="{Binding LastName}" Grid.Column="1"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <TextBlock Text="City" Foreground="White" Grid.Row="0" Grid.Column="2"/>
+            <TextBox Text="{Binding City}" Grid.Column="2"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="3">
+            <TextBlock Text="Skill" Foreground="White" Grid.Row="0" Grid.Column="3"/>
+            <TextBox Text="{Binding Skill}" Grid.Column="3"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="4">
+            <TextBlock Text="School Name" Foreground="White" Grid.Row="0" Grid.Column="4"/>
+            <TextBox Text="{Binding SchoolName}" Grid.Column="4"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="5">
+            <TextBlock Text="Degree" Foreground="White" Grid.Row="0" Grid.Column="5"/>
+            <TextBox Text="{Binding Degree}" Grid.Column="5"/>
+        </StackPanel>
 
         <!-- DataGrid for displaying candidates -->
         <DataGrid ItemsSource="{Binding Candidates}" Grid.Row="1" Grid.ColumnSpan="6">
-            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="City" Binding="{Binding City.Name}" />
+                <DataGridTextColumn Header="School Name" Binding="{Binding Education.SchoolName}" />
+                <DataGridTextColumn Header="Degree" Binding="{Binding Education.Degree}" />
+            </DataGrid.Columns>
+
         </DataGrid>
     </Grid>
 
